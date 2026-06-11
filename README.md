@@ -8,6 +8,8 @@ Built with .NET 9 and Avalonia UI. Runs on Windows and macOS.
 
 ## Features
 
+![SmartZipper Main Interface](ZipperApp/Screenshots/Main_GUI.jpg)
+
 - **Split by file count** — N files per archive
 - **Split by size (MB)** — Target archive size with accurate estimation
 - **Grouped mode** — Organize files into sub-folders within each zip (e.g., 10 folders of 10,000 files each)
