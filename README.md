@@ -84,7 +84,7 @@ Use SmartZipper for free if you are an individual using it for personal, non-com
 
 No restrictions. No time limits. No registration.
 
-### Commercial Use — $29
+### Commercial Use
 
 A commercial license is required if SmartZipper is used in any business, organization, or for-profit context. This includes:
 - Use by employees at a company
@@ -97,7 +97,7 @@ A commercial license is required if SmartZipper is used in any business, organiz
 - All current and future updates
 - Priority email support
 
-**Purchase:** [nocodedoc.com/smartzipper](https://nocodedoc.com/smartzipper) or contact [support@nocodedoc.com](mailto:support@nocodedoc.com)
+**Contact us for pricing:** [support@nocodedoc.com](mailto:support@nocodedoc.com)
 
 ### Security & Privacy
 
