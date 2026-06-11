@@ -27,8 +27,23 @@ You have 400,000 PDFs and need them organized into manageable zip archives for t
 
 Pre-built binaries available on the [Releases](https://github.com/SP-NoCodeDoc/SmartZipper/releases) page:
 
-- **Windows**: `ZipperApp.exe` (self-contained, ~94 MB)
-- **macOS (Apple Silicon)**: `ZipperApp.app` (self-contained, ~111 MB)
+- **Windows**: `SmartZipper-Windows-x64.zip`
+- **macOS (Apple Silicon)**: `SmartZipper-macOS-ARM64.zip`
+- **macOS (Intel)**: `SmartZipper-macOS-x64.zip`
+
+### Windows Installation
+
+Extract the zip and run `ZipperApp.exe`. On first launch, Windows SmartScreen may show a warning — click "More info" → "Run anyway". This is standard for independently published apps.
+
+### macOS Installation
+
+1. Extract the zip
+2. On first launch, macOS will block the app because it's not signed by Apple
+3. Go to **System Settings → Privacy & Security**
+4. Scroll down and click **"Open Anyway"** next to the SmartZipper message
+5. The app will run normally from then on
+
+This is standard for independently distributed macOS apps. SmartZipper runs entirely locally and does not access your personal data.
 
 ## Build from Source
 
