@@ -1,5 +1,8 @@
 using System.Linq;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.Input;
 using ZipperApp.ViewModels;
@@ -12,6 +15,17 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContextChanged += (_, _) => BindBrowseCommands();
+    }
+
+    private void OnCommercialLinkClicked(object? sender, PointerPressedEventArgs e)
+    {
+        var url = "https://nocodedoc.com/smartzipper";
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            Process.Start("open", url);
+        else
+            Process.Start("xdg-open", url);
     }
 
     private void BindBrowseCommands()

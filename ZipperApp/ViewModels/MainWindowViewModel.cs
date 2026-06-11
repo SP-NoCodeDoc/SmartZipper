@@ -24,9 +24,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool IsZipMode => OutputModeIndex == 0;
 
+    public bool ShowGroupedFields => UseGroupedMode && IsZipMode && IsSplitByCount;
+
     partial void OnOutputModeIndexChanged(int value)
     {
         OnPropertyChanged(nameof(IsZipMode));
+        OnPropertyChanged(nameof(ShowGroupedFields));
     }
 
     // --- Splitting: 0 = ByCount, 1 = BySize ---
@@ -39,13 +42,20 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         OnPropertyChanged(nameof(IsSplitByCount));
         OnPropertyChanged(nameof(IsSplitBySize));
+        OnPropertyChanged(nameof(ShowGroupedFields));
     }
 
     [ObservableProperty] private string _filesPerArchive = "1000";
     [ObservableProperty] private string _maxSizeMb = "100";
     [ObservableProperty] private string _filesPerFolder = "10000";
     [ObservableProperty] private string _foldersPerArchive = "10";
+    [ObservableProperty] private string _folderNamePrefix = "";
     [ObservableProperty] private bool _useGroupedMode = false;
+
+    partial void OnUseGroupedModeChanged(bool value)
+    {
+        OnPropertyChanged(nameof(ShowGroupedFields));
+    }
 
     // --- Options ---
     [ObservableProperty] private int _compressionLevelIndex = 1; // 0=Fastest, 1=Optimal, 2=SmallestSize
@@ -56,8 +66,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     // --- Progress ---
     [ObservableProperty] private double _progressPercent = 0;
-    [ObservableProperty] private string _statusText = "Ready";
+    [ObservableProperty] private string _statusText = "Configure settings and click Start.";
     [ObservableProperty] private bool _isRunning = false;
+    [ObservableProperty] private string _progressPercentText = "0.0%";
+    [ObservableProperty] private string _filesProgressText = "0 / 0";
+    [ObservableProperty] private string _archivesText = "0";
 
     // --- Log ---
     public ObservableCollection<string> LogMessages { get; } = new();
@@ -110,6 +123,7 @@ public partial class MainWindowViewModel : ViewModelBase
             MaxSizeMb = maxSize,
             FilesPerFolder = UseGroupedMode ? filesPerFolder : 0,
             FoldersPerArchive = UseGroupedMode ? foldersPerArch : 0,
+            FolderNamePrefix = FolderNamePrefix?.Trim() ?? "",
             CompressionLevel = level,
             Prefix = string.IsNullOrWhiteSpace(Prefix) ? "archive" : Prefix,
             IncludeTimestamp = IncludeTimestamp,
@@ -133,13 +147,14 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             ZipperApp.Services.AppLogger.Log($"Progress: {p.FilesProcessed}/{p.TotalFiles} files, {p.CompletedArchives} archives — {p.CurrentOperation}");
 
-            // This runs on the UI thread via SynchronizationContext
             ProgressPercent = p.TotalFiles > 0
                 ? (double)p.FilesProcessed / p.TotalFiles * 100
                 : 0;
-            StatusText = $"{p.CompletedArchives} created — {p.FilesProcessed:N0}/{p.TotalFiles:N0} files processed";
+            ProgressPercentText = $"{ProgressPercent:F1}%";
+            FilesProgressText = $"{p.FilesProcessed:N0} / {p.TotalFiles:N0}";
+            ArchivesText = $"{p.CompletedArchives}";
+            StatusText = p.CurrentOperation;
 
-            // Only add distinct log messages to avoid flooding
             if (LogMessages.Count == 0 || LogMessages[^1] != p.CurrentOperation)
                 LogMessages.Add(p.CurrentOperation);
         });

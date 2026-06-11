@@ -3,242 +3,244 @@
         xmlns:vm="using:ZipperApp.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="680" d:DesignHeight="720"
+        mc:Ignorable="d" d:DesignWidth="750" d:DesignHeight="650"
         x:Class="ZipperApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Title="ZipperApp"
+        Title="SmartZipper"
         Icon="/Assets/icon.png"
-        Width="680" Height="720" MinWidth="580" MinHeight="620">
+        Width="750" Height="650" MinWidth="600" MinHeight="500"
+        Background="#f0f1f5">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
     <Window.Styles>
-        <!-- Cards -->
-        <Style Selector="Border.card">
-            <Setter Property="Background" Value="#1e1e2e"/>
-            <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="Padding" Value="16,14"/>
-            <Setter Property="BorderBrush" Value="#2e2e42"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <!-- Section header -->
-        <Style Selector="TextBlock.sh">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#6b6b8b"/>
-            <Setter Property="Margin" Value="0,0,0,8"/>
-            <Setter Property="LetterSpacing" Value="1.2"/>
-        </Style>
-        <!-- Text inputs -->
         <Style Selector="TextBox">
-            <Setter Property="Background" Value="#16162a"/>
-            <Setter Property="Foreground" Value="#e0e0f0"/>
-            <Setter Property="BorderBrush" Value="#2e2e42"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="BorderBrush" Value="#d0d4e0"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="Padding" Value="10,7"/>
-            <Setter Property="FontSize" Value="12"/>
-        </Style>
-        <!-- Browse buttons -->
-        <Style Selector="Button.browse">
-            <Setter Property="Background" Value="#16162a"/>
-            <Setter Property="Foreground" Value="#7b8bdb"/>
-            <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="Padding" Value="12,7"/>
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="BorderBrush" Value="#2e2e42"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <!-- Primary action -->
-        <Style Selector="Button.go">
-            <Setter Property="Background" Value="#5b6abf"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="CornerRadius" Value="10"/>
-            <Setter Property="Padding" Value="24,10"/>
-            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style Selector="Button.browse">
+            <Setter Property="Background" Value="#f8f9fb"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="BorderBrush" Value="#d0d4e0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style Selector="Button.action">
+            <Setter Property="Background" Value="#e0e0e0"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="20,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        <!-- Stop button -->
-        <Style Selector="Button.stop">
-            <Setter Property="Background" Value="#1e1e2e"/>
-            <Setter Property="Foreground" Value="#8b8bab"/>
-            <Setter Property="CornerRadius" Value="10"/>
-            <Setter Property="Padding" Value="24,10"/>
+        <Style Selector="Button.action-primary">
+            <Setter Property="Background" Value="#4a4a4a"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="20,8"/>
             <Setter Property="FontSize" Value="13"/>
-            <Setter Property="BorderBrush" Value="#2e2e42"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        <!-- ComboBox -->
         <Style Selector="ComboBox">
-            <Setter Property="Background" Value="#16162a"/>
-            <Setter Property="Foreground" Value="#e0e0f0"/>
-            <Setter Property="BorderBrush" Value="#2e2e42"/>
-            <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="BorderBrush" Value="#d0d4e0"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="Padding" Value="6,4"/>
         </Style>
-        <!-- Progress bar -->
         <Style Selector="ProgressBar">
-            <Setter Property="Background" Value="#16162a"/>
-            <Setter Property="Foreground" Value="#5b6abf"/>
-            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Background" Value="#e0e3ea"/>
+            <Setter Property="Foreground" Value="#f5a623"/>
+            <Setter Property="CornerRadius" Value="3"/>
             <Setter Property="Height" Value="6"/>
-        </Style>
-        <!-- Labels -->
-        <Style Selector="TextBlock.lbl">
-            <Setter Property="Foreground" Value="#7b7b9b"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </Window.Styles>
 
-    <Grid RowDefinitions="Auto,*,Auto" Margin="24,20,24,16">
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto,Auto">
 
-        <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,16">
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="ZipperApp" FontSize="20" FontWeight="Bold" Foreground="#e0e0f0"/>
-                <TextBlock Text="Split · Compress · Distribute" FontSize="11" Foreground="#6b6b8b"/>
-            </StackPanel>
-        </Grid>
+        <!-- Header Bar -->
+        <Border Grid.Row="0" Background="White" BorderBrush="#e0e3ea" BorderThickness="0,0,0,1"
+                Padding="16,10">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <TextBlock Grid.Column="0" Text="SmartZipper" FontSize="15" FontWeight="Bold"
+                           Foreground="#222"/>
+                <TextBlock Grid.Column="2" Text="{Binding StatusText}" FontSize="12"
+                           Foreground="#888" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
 
-        <!-- Main Content -->
-        <ScrollViewer Grid.Row="1">
-            <StackPanel Spacing="10">
+        <!-- Source / Target -->
+        <StackPanel Grid.Row="1" Margin="16,12,16,8" Spacing="8">
+            <Grid ColumnDefinitions="60,*,Auto">
+                <TextBlock Grid.Column="0" Text="Source:" FontSize="13" Foreground="#555"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding InputPath}"
+                         Watermark="Select source file or folder..." Margin="0,0,8,0"/>
+                <Button Grid.Column="2" Content="Browse" Classes="browse"
+                        Command="{Binding BrowseInputCommand}"/>
+            </Grid>
+            <Grid ColumnDefinitions="60,*,Auto">
+                <TextBlock Grid.Column="0" Text="Target:" FontSize="13" Foreground="#555"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding OutputDir}"
+                         Watermark="Select output directory..." Margin="0,0,8,0"/>
+                <Button Grid.Column="2" Content="Browse" Classes="browse"
+                        Command="{Binding BrowseOutputCommand}"/>
+            </Grid>
+        </StackPanel>
 
-                <!-- Row 1: Input + Output -->
-                <Grid ColumnDefinitions="*,10,*">
-                    <Border Grid.Column="0" Classes="card">
-                        <StackPanel Spacing="6">
-                            <TextBlock Classes="sh" Text="INPUT"/>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <TextBox Grid.Column="0" Watermark="Folder path..."
-                                         Text="{Binding InputPath}" Margin="0,0,6,0"/>
-                                <Button Grid.Column="1" Content="Browse" Classes="browse"
-                                        Command="{Binding BrowseInputCommand}"/>
-                            </Grid>
-                            <TextBox Watermark="Pattern (*.pdf)" Text="{Binding FilePattern}"/>
+        <!-- Options Panel (replaces file list area) -->
+        <Border Grid.Row="2" Background="White" BorderBrush="#e0e3ea" BorderThickness="0,1"
+                Margin="16,4,16,4" CornerRadius="4" Padding="16,12">
+            <ScrollViewer>
+                <Grid ColumnDefinitions="*,24,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                    <!-- Left Column -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Mode" FontSize="11"
+                               Foreground="#888" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <ComboBox Grid.Row="1" Grid.Column="0" SelectedIndex="{Binding OutputModeIndex}"
+                              HorizontalAlignment="Stretch" Margin="0,0,0,10">
+                        <ComboBoxItem Content="ZIP archives"/>
+                        <ComboBoxItem Content="Distribute to folders"/>
+                    </ComboBox>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Split By" FontSize="11"
+                               Foreground="#888" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <ComboBox Grid.Row="3" Grid.Column="0" SelectedIndex="{Binding SplitModeIndex}"
+                              HorizontalAlignment="Stretch" Margin="0,0,0,10">
+                        <ComboBoxItem Content="File count"/>
+                        <ComboBoxItem Content="Size (MB)"/>
+                    </ComboBox>
+
+                    <StackPanel Grid.Row="4" Grid.Column="0" Spacing="6" Margin="0,0,0,10">
+                        <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding IsSplitByCount}">
+                            <TextBox Width="80" Text="{Binding FilesPerArchive}" Watermark="1000"/>
+                            <TextBlock Text="files each" FontSize="12" Foreground="#888" VerticalAlignment="Center"/>
                         </StackPanel>
-                    </Border>
-                    <Border Grid.Column="2" Classes="card">
-                        <StackPanel Spacing="6">
-                            <TextBlock Classes="sh" Text="OUTPUT"/>
-                            <Grid ColumnDefinitions="*,Auto">
-                                <TextBox Grid.Column="0" Watermark="Output folder..."
-                                         Text="{Binding OutputDir}" Margin="0,0,6,0"/>
-                                <Button Grid.Column="1" Content="Browse" Classes="browse"
-                                        Command="{Binding BrowseOutputCommand}"/>
-                            </Grid>
-                            <ComboBox SelectedIndex="{Binding OutputModeIndex}" HorizontalAlignment="Stretch">
-                                <ComboBoxItem Content="📦 ZIP archives"/>
-                                <ComboBoxItem Content="📁 Folders (no compression)"/>
-                            </ComboBox>
+                        <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding IsSplitBySize}">
+                            <TextBox Width="80" Text="{Binding MaxSizeMb}" Watermark="100"/>
+                            <TextBlock Text="MB each" FontSize="12" Foreground="#888" VerticalAlignment="Center"/>
                         </StackPanel>
-                    </Border>
-                </Grid>
-
-                <!-- Row 2: Splitting + Compression -->
-                <Grid ColumnDefinitions="*,10,*">
-                    <Border Grid.Column="0" Classes="card">
-                        <StackPanel Spacing="6">
-                            <TextBlock Classes="sh" Text="SPLITTING"/>
-                            <ComboBox SelectedIndex="{Binding SplitModeIndex}" HorizontalAlignment="Stretch">
-                                <ComboBoxItem Content="By file count"/>
-                                <ComboBoxItem Content="By size (MB)"/>
-                            </ComboBox>
-                            <StackPanel Orientation="Horizontal" Spacing="8"
-                                        IsVisible="{Binding IsSplitByCount}">
-                                <TextBox Width="70" Text="{Binding FilesPerArchive}" Watermark="1000"/>
-                                <TextBlock Classes="lbl" Text="files each"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="8"
-                                        IsVisible="{Binding IsSplitBySize}">
-                                <TextBox Width="70" Text="{Binding MaxSizeMb}" Watermark="100"/>
-                                <TextBlock Classes="lbl" Text="MB each"/>
-                            </StackPanel>
-                            <CheckBox Content="Group into sub-folders"
-                                      IsChecked="{Binding UseGroupedMode}" FontSize="11"
-                                      IsVisible="{Binding IsSplitByCount}"/>
-                            <StackPanel Spacing="4" IsVisible="{Binding UseGroupedMode}">
-                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                    <TextBox Width="60" Text="{Binding FilesPerFolder}" Watermark="10000"/>
-                                    <TextBlock Classes="lbl" Text="files/folder"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                    <TextBox Width="60" Text="{Binding FoldersPerArchive}" Watermark="10"/>
-                                    <TextBlock Classes="lbl" Text="folders/zip"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                    <Border Grid.Column="2" Classes="card">
-                        <StackPanel Spacing="6">
-                            <TextBlock Classes="sh" Text="COMPRESSION"/>
-                            <ComboBox SelectedIndex="{Binding CompressionLevelIndex}"
-                                      HorizontalAlignment="Stretch" IsEnabled="{Binding IsZipMode}">
-                                <ComboBoxItem Content="⚡ Fastest"/>
-                                <ComboBoxItem Content="⚖️ Optimal"/>
-                                <ComboBoxItem Content="🗜️ Smallest"/>
-                            </ComboBox>
-                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Margin="0,2,0,0">
-                                <TextBlock Grid.Row="0" Grid.Column="0" Classes="lbl" Text="Prefix" Margin="0,0,8,4"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Prefix}" Margin="0,0,0,4"/>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Classes="lbl" Text="Threads" Margin="0,0,8,0"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Parallelism}" Width="60"
-                                         HorizontalAlignment="Left"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-
-                <!-- Row 3: Extras -->
-                <Border Classes="card" Padding="14,10">
-                    <Grid ColumnDefinitions="*,Auto">
-                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8">
-                            <TextBlock Classes="lbl" Text="Oversized:"/>
-                            <ComboBox SelectedIndex="{Binding OversizedHandlingIndex}"
-                                      IsEnabled="{Binding IsSplitBySize}" Width="160">
-                                <ComboBoxItem Content="Own zip"/>
-                                <ComboBoxItem Content="Separate folder"/>
-                            </ComboBox>
-                        </StackPanel>
-                        <CheckBox Grid.Column="1" Content="Timestamp"
-                                  IsChecked="{Binding IncludeTimestamp}" FontSize="12"
-                                  Foreground="#7b7b9b"/>
-                    </Grid>
-                </Border>
-
-                <!-- Actions + Progress -->
-                <Grid ColumnDefinitions="Auto,Auto,*" Margin="0,6,0,0">
-                    <Button Grid.Column="0" Content="▶  Start" Classes="go"
-                            Command="{Binding StartCommand}" IsEnabled="{Binding !IsRunning}"/>
-                    <Button Grid.Column="1" Content="■  Stop" Classes="stop" Margin="10,0,0,0"
-                            Command="{Binding CancelCommand}" IsEnabled="{Binding IsRunning}"/>
-                    <TextBlock Grid.Column="2" Text="{Binding StatusText}" Foreground="#6b6b8b" FontSize="11"
-                               VerticalAlignment="Center" Margin="14,0,0,0"
-                               TextTrimming="CharacterEllipsis"/>
-                </Grid>
-
-                <ProgressBar Minimum="0" Maximum="100" Value="{Binding ProgressPercent}" Margin="0,6,0,0"/>
-
-                <!-- Log -->
-                <Border Classes="card" Padding="12,10">
-                    <StackPanel Spacing="4">
-                        <TextBlock Classes="sh" Text="LOG" Margin="0,0,0,4"/>
-                        <ListBox ItemsSource="{Binding LogMessages}" Height="80"
-                                 Background="Transparent" Foreground="#5b5b7b" FontSize="11"
-                                 BorderThickness="0" Padding="0"/>
                     </StackPanel>
-                </Border>
-            </StackPanel>
-        </ScrollViewer>
 
-        <!-- Footer -->
-        <TextBlock Grid.Row="2" Text="Built by Sachin Patel · nocodedoc.com" FontSize="10"
-                   Foreground="#4a4a6a" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    <CheckBox Grid.Row="5" Grid.Column="0" Content="Group into sub-folders"
+                              IsChecked="{Binding UseGroupedMode}" FontSize="12"
+                              IsVisible="{Binding IsSplitByCount}" Margin="0,0,0,6"
+                              IsEnabled="{Binding IsZipMode}"
+                              ToolTip.Tip="Organize files into numbered sub-folders inside each zip. When extracted, files will be in Folder_001/, Folder_002/, etc."/>
+                    <StackPanel Grid.Row="6" Grid.Column="0" Spacing="4" IsVisible="{Binding ShowGroupedFields}">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <TextBox Width="60" Text="{Binding FilesPerFolder}" Watermark="10000"
+                                     ToolTip.Tip="How many files to place in each sub-folder inside the zip. Example: 500 means each folder will contain up to 500 files."/>
+                            <TextBlock Text="files/folder" FontSize="11" Foreground="#888" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <TextBox Width="60" Text="{Binding FoldersPerArchive}" Watermark="10"
+                                     ToolTip.Tip="How many sub-folders to pack into a single zip archive. Example: 3 folders × 500 files = 1,500 files per zip."/>
+                            <TextBlock Text="folders/zip" FontSize="11" Foreground="#888" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <TextBox Width="100" Text="{Binding FolderNamePrefix}" Watermark="auto"
+                                     ToolTip.Tip="Name prefix for sub-folders inside the zip. Leave empty to use the source folder name. Example: 'Invoices' → Invoices_001, Invoices_002, etc."/>
+                            <TextBlock Text="folder name" FontSize="11" Foreground="#888" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Right Column -->
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Compression" FontSize="11"
+                               Foreground="#888" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <ComboBox Grid.Row="1" Grid.Column="2" SelectedIndex="{Binding CompressionLevelIndex}"
+                              HorizontalAlignment="Stretch" IsEnabled="{Binding IsZipMode}" Margin="0,0,0,10">
+                        <ComboBoxItem Content="Fastest"/>
+                        <ComboBoxItem Content="Optimal"/>
+                        <ComboBoxItem Content="Smallest"/>
+                    </ComboBox>
+
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="File Pattern" FontSize="11"
+                               Foreground="#888" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding FilePattern}"
+                             Watermark="*.pdf" Margin="0,0,0,10"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="Settings" FontSize="11"
+                               Foreground="#888" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <StackPanel Grid.Row="5" Grid.Column="2" Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Prefix:" FontSize="12" Foreground="#666" VerticalAlignment="Center"/>
+                            <TextBox Width="100" Text="{Binding Prefix}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Threads:" FontSize="12" Foreground="#666" VerticalAlignment="Center"/>
+                            <TextBox Width="50" Text="{Binding Parallelism}"/>
+                        </StackPanel>
+                        <CheckBox Content="Timestamp in names" IsChecked="{Binding IncludeTimestamp}"
+                                  FontSize="12"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Grid.Column="2" Margin="0,8,0,0">
+                        <TextBlock Text="Oversized files:" FontSize="11" Foreground="#888" Margin="0,0,0,4"/>
+                        <ComboBox SelectedIndex="{Binding OversizedHandlingIndex}"
+                                  IsEnabled="{Binding IsSplitBySize}" HorizontalAlignment="Stretch">
+                            <ComboBoxItem Content="Own zip each"/>
+                            <ComboBoxItem Content="Separate folder"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Activity Log (collapsible) -->
+        <Expander Grid.Row="3" Header="▶ Activity Log" Margin="16,0,16,4" FontSize="12"
+                  Foreground="#666" Padding="0">
+            <ListBox ItemsSource="{Binding LogMessages}" Height="80"
+                     Background="White" FontSize="11" Foreground="#666"
+                     BorderBrush="#e0e3ea" BorderThickness="1" CornerRadius="4"
+                     Padding="4"/>
+        </Expander>
+
+        <!-- Progress Bar + Stats -->
+        <StackPanel Grid.Row="4" Margin="16,4,16,8" Spacing="4">
+            <Grid ColumnDefinitions="*,Auto">
+                <ProgressBar Grid.Column="0" Minimum="0" Maximum="100"
+                             Value="{Binding ProgressPercent}"/>
+                <TextBlock Grid.Column="1" Text="{Binding ProgressPercentText}" FontSize="11"
+                           Foreground="#888" Margin="8,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*,*,*">
+                <TextBlock Grid.Column="0" FontSize="11" Foreground="#888">
+                    <Run Text="Files: "/><Run Text="{Binding FilesProgressText}"/>
+                </TextBlock>
+                <TextBlock Grid.Column="1" FontSize="11" Foreground="#888">
+                    <Run Text="Archives: "/><Run Text="{Binding ArchivesText}"/>
+                </TextBlock>
+            </Grid>
+        </StackPanel>
+
+        <!-- Bottom Bar -->
+        <Border Grid.Row="5" Background="White" BorderBrush="#e0e3ea" BorderThickness="0,1,0,0"
+                Padding="16,10">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                    <TextBlock Text="Free for personal use ·" FontSize="10" Foreground="#999"/>
+                    <TextBlock Text="Commercial license" FontSize="10" Foreground="#5b6abf"
+                               Cursor="Hand" TextDecorations="Underline"
+                               PointerPressed="OnCommercialLinkClicked"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Cancel" Classes="action" Margin="0,0,8,0"
+                        Command="{Binding CancelCommand}" IsEnabled="{Binding IsRunning}"/>
+                <Button Grid.Column="2" Content="Start" Classes="action-primary"
+                        Command="{Binding StartCommand}" IsEnabled="{Binding !IsRunning}"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

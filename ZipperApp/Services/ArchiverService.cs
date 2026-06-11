@@ -49,6 +49,7 @@ public record ArchiverOptions
     public int MaxSizeMb { get; init; } = 100;
     public int FilesPerFolder { get; init; } = 0;       // 0 = no sub-folders
     public int FoldersPerArchive { get; init; } = 0;    // 0 = use FilesPerArchive directly
+    public string FolderNamePrefix { get; init; } = ""; // empty = use source folder name
     public CompressionLevel CompressionLevel { get; init; } = CompressionLevel.Optimal;
     public string Prefix { get; init; } = "archive";
     public bool IncludeTimestamp { get; init; } = false;
@@ -146,7 +147,12 @@ public class ArchiverService
         int foldersPerArchive = options.FoldersPerArchive;
         int filesPerArchive = filesPerFolder * foldersPerArchive;
 
-        AppLogger.Log($"Grouped mode: {filesPerFolder} files/folder, {foldersPerArchive} folders/zip = {filesPerArchive} files/zip");
+        // Determine folder name prefix: user-specified or source folder name
+        string folderPrefix = !string.IsNullOrWhiteSpace(options.FolderNamePrefix)
+            ? options.FolderNamePrefix
+            : Path.GetFileName(options.InputPath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)) ?? "Folder";
+
+        AppLogger.Log($"Grouped mode: {filesPerFolder} files/folder, {foldersPerArchive} folders/zip, prefix='{folderPrefix}'");
 
         // Split files into archive-sized chunks
         var archiveChunks = SplitByCount(files, filesPerArchive);
@@ -174,7 +180,7 @@ public class ArchiverService
                 var name = MakeName(options.Prefix, index + 1, totalArchives, options.IncludeTimestamp, ".zip");
                 var outPath = Path.Combine(options.OutputDir, name);
 
-                WriteZipGrouped(outPath, chunk, filesPerFolder, options.CompressionLevel, token);
+                WriteZipGrouped(outPath, chunk, filesPerFolder, folderPrefix, options.CompressionLevel, token);
                 results[index] = outPath;
 
                 var size = new FileInfo(outPath).Length;
@@ -202,7 +208,8 @@ public class ArchiverService
     /// E.g., Folder_01/file1.pdf, Folder_01/file2.pdf, ..., Folder_02/file1001.pdf, ...
     /// </summary>
     private static void WriteZipGrouped(string path, List<FileInfo> files,
-                                         int filesPerFolder, CompressionLevel level, CancellationToken ct)
+                                         int filesPerFolder, string folderPrefix,
+                                         CompressionLevel level, CancellationToken ct)
     {
         using var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 81920);
         using var archive = new ZipArchive(stream, ZipArchiveMode.Create);
@@ -222,7 +229,7 @@ public class ArchiverService
                 usedNames.Clear();
             }
 
-            var folderName = $"Folder_{folderIndex:D3}";
+            var folderName = $"{folderPrefix}_{folderIndex:D3}";
             var fileName = UniqueName(file.Name, usedNames);
             usedNames.Add(fileName);
             var entryPath = $"{folderName}/{fileName}";
