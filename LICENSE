@@ -1,29 +1,41 @@
-SmartZipper License
+SmartZipper — Proprietary License
 
-Copyright (c) 2024-2026 Sachin Patel (NoCodeDoc)
+Copyright (c) 2024-2026 Sachin Patel / NoCodeDoc
+All rights reserved.
 
 PERSONAL USE
-Permission is hereby granted, free of charge, to any individual
-to use, copy, and modify this software for personal,
-non-commercial purposes.
+You may use this software free of charge for personal,
+non-commercial purposes. You may view the source code for
+learning and reference.
 
 COMMERCIAL USE
-Use of this software in a commercial, business, or organizational
-context requires a paid commercial license. This includes but is
-not limited to:
-- Use by employees within a company
-- Use in for-profit workflows or services
-- Distribution as part of a commercial product
-- Use by government or institutional entities
-
-For commercial licensing, contact: support@nocodedoc.com
+Use in any business, organizational, or for-profit context
+requires a paid commercial license. Contact support@nocodedoc.com.
 
 RESTRICTIONS
-- You may not sell or sublicense this software without written
-  permission from the author.
-- You may not remove this license notice from any copies.
+You may NOT:
+- Copy, modify, or redistribute this software or its source
+  code for any commercial purpose
+- Create derivative works based on this software
+- Rebrand, resell, sublicense, or redistribute this software
+  in any form (source or binary)
+- Use this software's code, in whole or in part, in another
+  product or service
+- Remove or alter this license notice
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR
-ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF
-THIS SOFTWARE.
+The source code is provided for transparency and security
+auditing purposes only. Viewing the source does not grant
+any right to copy, modify, or reuse it.
+
+CONTRIBUTIONS
+Any contributions submitted to this project (pull requests,
+patches, suggestions) become the property of the copyright
+holder and are subject to this same license.
+
+LIABILITY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THIS
+SOFTWARE.
+
+For licensing inquiries: support@nocodedoc.com
