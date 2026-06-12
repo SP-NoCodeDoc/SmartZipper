@@ -50,12 +50,38 @@ jobs:
 
       - name: Create app bundle (ARM64)
         run: |
-          mkdir -p SmartZipper.app/Contents/MacOS
-          mkdir -p SmartZipper.app/Contents/Resources
-          cp publish/osx-arm64/* SmartZipper.app/Contents/MacOS/ 2>/dev/null || true
-          cp ZipperApp/Assets/AppIcon.icns SmartZipper.app/Contents/Resources/AppIcon.icns
-          chmod +x SmartZipper.app/Contents/MacOS/ZipperApp
-          cat > SmartZipper.app/Contents/Info.plist << 'EOF'
+          mkdir -p SmartZipper-ARM64.app/Contents/MacOS
+          mkdir -p SmartZipper-ARM64.app/Contents/Resources
+          cp publish/osx-arm64/* SmartZipper-ARM64.app/Contents/MacOS/ 2>/dev/null || true
+          cp ZipperApp/Assets/AppIcon.icns SmartZipper-ARM64.app/Contents/Resources/AppIcon.icns
+          chmod +x SmartZipper-ARM64.app/Contents/MacOS/ZipperApp
+          cat > SmartZipper-ARM64.app/Contents/Info.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>CFBundleName</key><string>SmartZipper</string>
+            <key>CFBundleDisplayName</key><string>SmartZipper</string>
+            <key>CFBundleIdentifier</key><string>com.nocodedoc.smartzipper</string>
+            <key>CFBundleVersion</key><string>1.1.0</string>
+            <key>CFBundleShortVersionString</key><string>1.1.0</string>
+            <key>CFBundleExecutable</key><string>ZipperApp</string>
+            <key>CFBundleIconFile</key><string>AppIcon</string>
+            <key>CFBundlePackageType</key><string>APPL</string>
+            <key>LSMinimumSystemVersion</key><string>11.0</string>
+            <key>NSHighResolutionCapable</key><true/>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Create app bundle (x64)
+        run: |
+          mkdir -p SmartZipper-x64.app/Contents/MacOS
+          mkdir -p SmartZipper-x64.app/Contents/Resources
+          cp publish/osx-x64/* SmartZipper-x64.app/Contents/MacOS/ 2>/dev/null || true
+          cp ZipperApp/Assets/AppIcon.icns SmartZipper-x64.app/Contents/Resources/AppIcon.icns
+          chmod +x SmartZipper-x64.app/Contents/MacOS/ZipperApp
+          cat > SmartZipper-x64.app/Contents/Info.plist << 'EOF'
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
@@ -78,14 +104,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SmartZipper-macOS-ARM64
-          path: SmartZipper.app
+          path: SmartZipper-ARM64.app
           compression-level: 0
 
       - name: Upload macOS x64 artifact
         uses: actions/upload-artifact@v4
         with:
           name: SmartZipper-macOS-x64
-          path: publish/osx-x64/
+          path: SmartZipper-x64.app
           compression-level: 0
 
   release:
@@ -115,7 +141,9 @@ jobs:
           cd release
           mv macos-arm64 SmartZipper.app
           zip -r ../SmartZipper-macOS-ARM64.zip SmartZipper.app/
-          zip -r ../SmartZipper-macOS-x64.zip macos-x64/
+          rm -rf SmartZipper.app
+          mv macos-x64 SmartZipper.app
+          zip -r ../SmartZipper-macOS-x64.zip SmartZipper.app/
           cp windows/SmartZipper.exe ../SmartZipper-Windows-x64.exe
 
       - name: Create GitHub Release
