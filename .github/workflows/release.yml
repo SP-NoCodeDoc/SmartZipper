@@ -113,7 +113,8 @@ jobs:
       - name: Package for release
         run: |
           cd release
-          zip -r ../SmartZipper-macOS-ARM64.zip macos-arm64/
+          mv macos-arm64 SmartZipper.app
+          zip -r ../SmartZipper-macOS-ARM64.zip SmartZipper.app/
           zip -r ../SmartZipper-macOS-x64.zip macos-x64/
           cp windows/SmartZipper.exe ../SmartZipper-Windows-x64.exe
 
